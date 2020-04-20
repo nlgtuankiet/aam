@@ -20,7 +20,7 @@ android {
     release {
       def env = System.getenv()
       def keystoreFile = new File(rootProject.projectDir, ".keystore")
-      keystoreFile.deleteOnExit()
+      keystoreFile.delete()
       keystoreFile.createNewFile()
       keystoreFile << env.getOrDefault("ANDROID_KEYSTORE", "").decodeBase64()
       storeFile keystoreFile
