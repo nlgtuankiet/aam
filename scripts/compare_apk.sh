@@ -19,6 +19,7 @@ compareApk() {
   done
   initGcloud
   downloadApk "$masterCommit"
+  cp "./$masterCommit.apk" "./build/master.apk"
 }
 
 # download apk to current directory

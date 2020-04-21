@@ -34,6 +34,19 @@ jobs:
       - run:
           name: Compare apk
           command: sh ./scripts/compare_apk.sh
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build
+            - ./**/build
+            - scripts
+  danger:
+    executor: android_executor
+    steps:
+      - run:
+          name: Danger
+          command: bundle install && bundle exec danger
+
 
 workflows:
   version: 2
@@ -47,3 +60,6 @@ workflows:
       - compare-apk:
           requires:
             - build-release-apk
+      - danger:
+          requires:
+            - compare-apk
