@@ -22,8 +22,15 @@ jobs:
       - run:
           name: Check
           command: ./gradlew check --stacktrace
+  check_apk_size_change:
+    executor: android-executor
+    steps:
+      - checkout
+      - run:
+          name: hello world
+          command: ehco hello
 
 workflows:
   verify:
     jobs:
-      - build
+      - check_apk_size_change
