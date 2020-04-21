@@ -27,7 +27,9 @@ jobs:
       - image: google/cloud-sdk
     steps:
       - checkout
-      - command: sh ./scripts/check_apk_size.sh
+      - run:
+          name: Check Apk Size
+          command: ./scripts/check_apk_size.sh
 
 workflows:
   verify:
