@@ -30,7 +30,7 @@ downloadApk() {
 }
 
 initGcloud() {
-  echo "$AAM_GCLOUD_SERVICE_ACCOUNT_KEY_BASE64" | base64 -d -i - >>"key.json"
+  echo "$AAM_GCLOUD_SERVICE_ACCOUNT_KEY_BASE64" | base64 -d -i - >> "key.json"
   gcloud auth activate-service-account all-about-min@appspot.gserviceaccount.com --key-file=./key.json
   gcloud config set project all-about-min
 }
