@@ -39,5 +39,13 @@ subprojects {
             target '**/*.kt'
             ktlint(versions.ktlint)
         }
+        groovyGradle {
+            // same as groovy, but for .gradle (defaults to '*.gradle')
+            target '**/*.gradle'
+            paddedCell() // Avoid cyclic ambiguities
+            // the Groovy Eclipse formatter extends the Java Eclipse formatter,
+            // so it formats Java files by default (unless `excludeJava` is used).
+            greclipse().configFile(project.rootProject.file('scripts/greclipse.properties'))
+        }
     }
 }
