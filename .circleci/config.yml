@@ -23,12 +23,11 @@ jobs:
           name: Check
           command: ./gradlew check --stacktrace
   check_apk_size_change:
-    executor: android-executor
+    docker:
+      - image: google/cloud-sdk
     steps:
       - checkout
-      - run:
-          name: hello world
-          command: ehco hello
+      - command: sh ./scripts/check_apk_size.sh
 
 workflows:
   verify:
