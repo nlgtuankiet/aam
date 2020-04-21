@@ -5,17 +5,15 @@
 # gsutil cp gs://all-about-min.appspot.com/11080425_455425407954554_5715761550478109524_o.jpg ./image.jpg
 # echo "$CIRCLE_BRANCH"
 
-compare_apk() {
+compareApk() {
   masterBranchRegex="master"
   current_commit_sha=$(git rev-parse HEAD)
-    echo "Compare apk"
+  echo "Compare apk"
   fromCommit=$(git log -n 1 --pretty=format:%H HEAD~0)
   masterCommit=""
   masterCommitBranches=""
-
   number=0
-  while :
-  do
+  while :; do
     masterCommit=$(git log -n 1 --pretty=format:%H HEAD~$number)
     masterCommitBranches=$(git branch --quiet -r --contains "${masterCommit}" | cat)
     echo "checking: $masterCommit"
@@ -25,10 +23,17 @@ compare_apk() {
       echo "found master commit: ${masterCommit}"
       break
     fi
-    number=$((number+1))
+    number=$((number + 1))
   done
 }
 
-compare_apk
 
 
+
+
+saveToStorage() {
+  echo "$1"
+  echo "$2"
+}
+
+saveToStorage "aaa" "bbb"

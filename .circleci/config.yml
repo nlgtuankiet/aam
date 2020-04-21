@@ -2,7 +2,7 @@
 version: 2.1
 
 executors:
-  android-executor:
+  android_executor:
     docker:
       - image: circleci/android:api-29
     working_directory: ~/aam
@@ -30,8 +30,37 @@ jobs:
       - run:
           name: Check Apk Size
           command: sh ./scripts/check_apk_size.sh
+  build_release_apk:
+    executor: android_executor
+    steps:
+      - checkout
+      - run:
+          name: Build Release Apk
+          command: sh ./scripts/build_release_apk.sh
+      - store_artifacts:
+          path: ./build/universal.apk
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build
+            - ./**/build
+  compare_apk:
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - run:
+          name: Compare apk
+          command: sh ./scripts/compare_apk.sh
 
 workflows:
-  verify:
+  version: 2
+  pull_request_flow:
+    filters:
+      branches:
+        ignore:
+          - master
     jobs:
-      - check_apk_size_change
+      - build_release_apk:
+      - compare_apk:
+          requires:
+            - build_release_apk
