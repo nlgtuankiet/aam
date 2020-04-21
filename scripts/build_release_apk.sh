@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # build universal apk from app bundle to ./build/universal.apk
 
 buildBundle() {
