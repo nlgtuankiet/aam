@@ -1,5 +1,6 @@
-# compare ./build/universal.apk to nearest master commit
+#!/bin/bash
 
+# compare ./build/universal.apk to nearest master commit
 compareApk() {
   masterBranchRegex="master"
   masterCommit=""
