@@ -21,8 +21,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Check list
-          command: ls -lha && pwd
+          name: Init gradle
+          command: ./gradlew dependencies
       - run:
           name: Build Release Apk
           command: sh ./scripts/build_release_apk.sh
