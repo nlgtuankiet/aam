@@ -17,7 +17,7 @@ compareApk() {
     fi
     number=$((number + 1))
   done
-
+  initGcloud
   downloadApk "$masterCommit"
 }
 
@@ -26,6 +26,12 @@ downloadApk() {
   echo "downloadApk invoke with:"
   echo "  Commit sha: $1"
   gsutil cp "gs://all-about-min.appspot.com/apk/$1.apk" "./$1.apk"
+}
+
+initGcloud() {
+  echo "$AAM_GCLOUD_SERVICE_ACCOUNT_KEY_BASE64" | base64 -d -i - >> "key.json"
+  gcloud auth activate-service-account all-about-min@appspot.gserviceaccount.com --key-file=./key.json
+  gcloud config set project all-about-min
 }
 
 compareApk
