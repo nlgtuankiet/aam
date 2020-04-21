@@ -32,7 +32,7 @@ jobs:
       - image: google/cloud-sdk
     steps:
       - run:
-          name: Check list file
+          name: Check ls
           command: ls -lha
       - run:
           name: Compare apk
