@@ -26,13 +26,14 @@ jobs:
           paths:
             - build
             - ./**/build
+            - scripts
   compare-apk:
     docker:
       - image: google/cloud-sdk
     steps:
       - run:
           name: Compare apk
-          command: chmod +x ./scripts/compare_apk.sh && ./scripts/compare_apk.sh
+          command: sh ./scripts/compare_apk.sh
 
 workflows:
   version: 2
