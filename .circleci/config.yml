@@ -17,14 +17,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Hello world
-          command: exit 0
-      - run:
           name: Download Dependencies
           command: ./gradlew dependencies
       - run:
-          name: Run JVM Tests & Lint, assemble app and test APKs for debug and release
-          command: ./gradlew assembleDebug --stacktrace
+          name: Check
+          command: ./gradlew check --stacktrace
 
 workflows:
   build_debug:
