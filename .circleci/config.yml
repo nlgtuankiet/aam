@@ -37,6 +37,8 @@ jobs:
   compare-apk:
     executor: gcloud_executor
     steps:
+      - attach_workspace:
+          at: ~/aam
       - run:
           name: Check list
           command: ls -lha && pwd
@@ -52,6 +54,8 @@ jobs:
   danger:
     executor: android_executor
     steps:
+      - attach_workspace:
+          at: ~/aam
       - run:
           name: Danger
           command: bundle install && bundle exec danger
