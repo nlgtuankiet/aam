@@ -21,31 +21,34 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Check list
+          command: ls -lha && pwd
+      - run:
           name: Build Release Apk
           command: sh ./scripts/build_release_apk.sh
       - store_artifacts:
           path: ./build/universal.apk
       - persist_to_workspace:
-          root: ./
+          root: .
           paths:
-            - ./build
+            - build
             - ./**/build
-            - ./scripts
+            - scripts
   compare-apk:
     executor: gcloud_executor
     steps:
       - run:
           name: Check list
-          command: ls -lha
+          command: ls -lha && pwd
       - run:
           name: Compare apk
           command: sh ./scripts/compare_apk.sh
       - persist_to_workspace:
-          root: ./
+          root: .
           paths:
-            - ./build
+            - build
             - ./**/build
-            - ./scripts
+            - scripts
   danger:
     executor: android_executor
     steps:
