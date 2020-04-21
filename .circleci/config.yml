@@ -18,7 +18,7 @@ jobs:
       - checkout
       - run:
           name: Hello world
-          command: exit 1
+          command: exit 0
       - run:
           name: Download Dependencies
           command: ./gradlew dependencies
