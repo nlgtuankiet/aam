@@ -26,7 +26,7 @@ jobs:
           paths:
             - build
             - ./**/build
-  compare_apk:
+  compare-apk:
     docker:
       - image: google/cloud-sdk
     steps:
@@ -43,6 +43,6 @@ workflows:
             branches:
               ignore:
                 - master
-      - compare_apk:
+      - compare-apk:
           requires:
-            - build_release_apk
+            - build-release-apk
