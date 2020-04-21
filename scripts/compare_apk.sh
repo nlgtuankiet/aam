@@ -11,7 +11,7 @@ compareApk() {
     masterCommitBranches=$(git branch --quiet -r --contains "${masterCommit}" | cat)
     echo "checking: $masterCommit"
     echo "branches: $masterCommitBranches"
-    if [ "${masterCommitBranches}" == ${masterBranchRegex} ]; then
+    if [[ "${masterCommitBranches}" =~ ${masterBranchRegex} ]]; then
       echo "branches: $masterCommitBranches"
       echo "found master commit: ${masterCommit}"
       break
