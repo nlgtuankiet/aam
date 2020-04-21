@@ -5,10 +5,15 @@ executors:
   android_executor:
     docker:
       - image: circleci/android:api-29
+    working_directory: ~/aam
     environment:
       JAVA_TOOL_OPTIONS: "-Xmx2048m"
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
       TERM: dumb
+  gcloud_executor:
+    docker:
+      - image: google/cloud-sdk
+    working_directory: ~/aam
 
 jobs:
   build-release-apk:
@@ -27,8 +32,7 @@ jobs:
             - ./**/build
             - ./scripts
   compare-apk:
-    docker:
-      - image: google/cloud-sdk
+    executor: gcloud_executor
     steps:
       - run:
           name: Check list
