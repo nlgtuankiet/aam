@@ -27,5 +27,6 @@ extractApk() {
   mv ./universal.apk ./build/universal.apk
   ls -l ./build/universal.apk
 }
-
+pwd
+ls -lha
 buildBundle && extractApk
