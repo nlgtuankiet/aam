@@ -60,7 +60,7 @@ workflows:
         ignore:
           - master
     jobs:
-      - build_release_apk:
+      - build_release_apk
       - compare_apk:
           requires:
             - build_release_apk
