@@ -24,6 +24,6 @@ jobs:
           command: ./gradlew check --stacktrace
 
 workflows:
-  build_debug:
+  verify:
     jobs:
       - build
