@@ -44,7 +44,7 @@ jobs:
           command: ls -lha && pwd
       - run:
           name: Compare apk
-          command: sh ./scripts/compare_apk.sh
+          command: bash ./scripts/compare_apk.sh
       - persist_to_workspace:
           root: .
           paths:
