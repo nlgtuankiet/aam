@@ -12,25 +12,7 @@ executors:
       TERM: dumb
 
 jobs:
-  build:
-    executor: android-executor
-    steps:
-      - checkout
-      - run:
-          name: Download Dependencies
-          command: ./gradlew dependencies
-      - run:
-          name: Check
-          command: ./gradlew check --stacktrace
-  check_apk_size_change:
-    docker:
-      - image: google/cloud-sdk
-    steps:
-      - checkout
-      - run:
-          name: Check Apk Size
-          command: sh ./scripts/check_apk_size.sh
-  build_release_apk:
+  build-release-apk:
     executor: android_executor
     steps:
       - checkout
@@ -54,13 +36,13 @@ jobs:
 
 workflows:
   version: 2
-  pull_request_flow:
-    filters:
-      branches:
-        ignore:
-          - master
+  pull-request-flow:
     jobs:
-      - build_release_apk
+      - build-release-apk:
+          filters:
+            branches:
+              ignore:
+                - master
       - compare_apk:
           requires:
             - build_release_apk
