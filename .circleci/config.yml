@@ -17,6 +17,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Hello world
+          command: echo hello world
+      - run:
           name: Download Dependencies
           command: ./gradlew dependencies
       - run:
