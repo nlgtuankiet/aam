@@ -22,7 +22,7 @@ jobs:
       - store_artifacts:
           path: ./build/universal.apk
       - persist_to_workspace:
-          root: .
+          root: ./
           paths:
             - ./build
             - ./**/build
@@ -32,10 +32,13 @@ jobs:
       - image: google/cloud-sdk
     steps:
       - run:
+          name: Check ls
+          command: ls -lha
+      - run:
           name: Compare apk
           command: sh ./scripts/compare_apk.sh
       - persist_to_workspace:
-          root: .
+          root: ./
           paths:
             - ./build
             - ./**/build
