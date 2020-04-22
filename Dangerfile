@@ -18,4 +18,5 @@ apkstats.compare_with('./build/master.apk', do_report: true)
 android_lint.skip_gradle_task = true
 android_lint.severity = "Warning"
 android_lint.report_file = "app/build/reports/lint-results.xml"
+android_lint.report_file = "app/build/reports/detekt/detekt.xml"
 android_lint.lint(inline_mode: true)
