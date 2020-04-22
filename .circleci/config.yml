@@ -21,7 +21,7 @@ commands:
     steps:
       - run:
           name: Check all
-          command: ./gradlew check
+          command: ./gradlew detekt
   restore_workspace:
     description: "Restore workspace"
     steps:
