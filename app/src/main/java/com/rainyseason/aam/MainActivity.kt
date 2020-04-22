@@ -31,12 +31,4 @@ class MainActivity : AppCompatActivity() {
     private fun hello() {
         println("Hello!")
     }
-
-    fun hello2(action: () -> Unit, aaa: String) {
-
-    }
-
-    fun hello3(action: () -> Unit, aaa: String) {
-
-    }
 }
