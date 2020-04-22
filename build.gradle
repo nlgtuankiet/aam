@@ -68,7 +68,7 @@ allprojects {
 allprojects {
     apply plugin: 'io.gitlab.arturbosch.detekt'
     detekt {
-        failFast = false
+        failFast = true
         buildUponDefaultConfig = true
         config = project.rootProject.files(".detekt/config.yml")
         reports {
