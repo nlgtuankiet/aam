@@ -24,7 +24,7 @@ commands:
           command: rm -rf gradle.lock
       - run:
           name: Generate gradle.lock
-          command: find . -name "*.gradle" -type f | xargs cat | > gradle.lock
+          command: find . -name "*.gradle" -type f -exec cat {} > gradle.lock \;
       - run:
           name: Debug gradle.lock
           command: cat gradle.lock
