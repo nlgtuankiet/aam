@@ -75,7 +75,7 @@ jobs:
           command: sh ./scripts/build_release_apk.sh
       - store_artifacts:
           path: ./build/universal.apk
-      - store_test_results:
+      - store_artifacts:
           path: ./app/build/reports
       - save_workspace
   compare-apk:
