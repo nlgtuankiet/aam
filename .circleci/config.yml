@@ -16,6 +16,12 @@ executors:
     working_directory: ~/aam
 
 commands:
+  check:
+    description: "Check code style + lint"
+    steps:
+      - run:
+          name: Check all
+          command: ./gradlew check
   restore_workspace:
     description: "Restore workspace"
     steps:
@@ -59,18 +65,18 @@ commands:
             - "~/.gradle"
 
 jobs:
-  build-release-apk:
+  check-apk:
     executor: android_executor
     steps:
       - checkout
-      - run:
-          name: Init gradle
-          command: ./gradlew dependencies
+      - check
       - run:
           name: Build Release Apk
           command: sh ./scripts/build_release_apk.sh
       - store_artifacts:
           path: ./build/universal.apk
+      - store_test_results:
+          path: ./app/build/reports
       - save_workspace
   compare-apk:
     executor: gcloud_executor
@@ -97,14 +103,14 @@ workflows:
   version: 2
   pull-request-flow:
     jobs:
-      - build-release-apk:
+      - check-apk:
           filters:
             branches:
               ignore:
                 - master
       - compare-apk:
           requires:
-            - build-release-apk
+            - check-apk
       - danger:
           requires:
             - compare-apk
