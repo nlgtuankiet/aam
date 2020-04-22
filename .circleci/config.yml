@@ -49,8 +49,8 @@ jobs:
   build-release-apk:
     executor: android_executor
     steps:
-      - restore_gradle_cache
       - checkout
+      - restore_gradle_cache
       - run:
           name: Init gradle
           command: ./gradlew dependencies
