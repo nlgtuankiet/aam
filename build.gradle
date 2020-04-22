@@ -68,7 +68,7 @@ allprojects {
 allprojects {
     apply plugin: 'io.gitlab.arturbosch.detekt'
     detekt {
-        failFast = true
+        failFast = false
         buildUponDefaultConfig = true
         reports {
             html.enabled = true
