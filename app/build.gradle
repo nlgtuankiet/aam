@@ -54,6 +54,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        textReport false
+        xmlReport true
+        checkDependencies true
+        checkTestSources true
+        ignoreTestSources false
+        explainIssues true
+        checkReleaseBuilds true
+        abortOnError false
+    }
 }
 
 dependencies {
