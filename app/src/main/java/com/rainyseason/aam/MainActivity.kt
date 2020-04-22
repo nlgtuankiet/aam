@@ -24,11 +24,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-            setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main)
         val textView = findViewById<TextView>(R.id.sample)
-        textView.text = """123"""
-                                hello()
     }
 
     private fun hello() {
