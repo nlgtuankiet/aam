@@ -70,6 +70,7 @@ allprojects {
     detekt {
         failFast = false
         buildUponDefaultConfig = true
+        config = project.rootProject.files(".detekt/config.yml")
         reports {
             html.enabled = true
             xml.enabled = true
