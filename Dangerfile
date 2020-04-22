@@ -12,5 +12,10 @@ warn("Big PR") if git.lines_of_code > 500
 fail("fdescribe left in tests") if `grep -r fdescribe specs/ `.length > 1
 fail("fit left in tests") if `grep -r fit specs/ `.length > 1
 
+android_lint.skip_gradle_task = true
+android_lint.severity = "Warning"
+android_lint.report_file = "app/build/reports/lint-results.html"
+android_lint.lint(inline_mode: true)
+
 apkstats.apk_filepath='./build/universal.apk'
 apkstats.compare_with('./build/master.apk', do_report: true)
