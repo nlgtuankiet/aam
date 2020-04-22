@@ -15,10 +15,41 @@ executors:
       - image: google/cloud-sdk
     working_directory: ~/aam
 
+commands:
+  generate_gradle_lock:
+    description: "Generate gradle.lock file"
+    steps:
+      - run:
+          name: Delete old gradle.lock if any
+          command: rm -rf gradle.lock
+      - run:
+          name: Generate gradle.lock
+          command: find . -name "*.gradle" -type f | xargs cat | > gradle.lock
+      - run:
+          name: Debug gradle.lock
+          command: cat gradle.lock
+  restore_gradle_cache:
+    description: "Restore gradle cache (~/.gradle)"
+    steps:
+      - generate_gradle_lock
+      - restore_cache:
+          keys:
+            - v1-{{ checksum "gradle/wrapper/gradle-wrapper.properties"}}-{{ checksum "gradle.lock"}}
+            - v1-{{ checksum "gradle/wrapper/gradle-wrapper.properties"}}-
+  save_gradle_cache:
+    description: "Save gradle cache (~/.gradle)"
+    steps:
+      - generate_gradle_lock
+      - save_cache:
+          key: v1-{{ checksum "gradle/wrapper/gradle-wrapper.properties"}}-{{ checksum "gradle.lock"}}
+          paths:
+            - "~/.gradle"
+
 jobs:
   build-release-apk:
     executor: android_executor
     steps:
+      - restore_gradle_cache
       - checkout
       - run:
           name: Init gradle
@@ -33,6 +64,7 @@ jobs:
           paths:
             - build
             - ./**/build
+      - save_gradle_cache
   compare-apk:
     executor: gcloud_executor
     steps:
