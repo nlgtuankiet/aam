@@ -15,11 +15,13 @@
  */
 
 buildscript {
-    ext.kotlin_version = '1.3.71'
-
-    ext.versions = [
-        'ktlint': '0.36.0',
-    ]
+    ext {
+        kotlin_version = '1.3.71'
+        versions = [
+            'ktlint': '0.36.0',
+        ]
+        isInCI = Boolean.parseBoolean(System.getenv().getOrDefault("CI", "false"))
+    }
     repositories {
         google()
         jcenter()
@@ -39,6 +41,7 @@ plugins {
 }
 
 allprojects {
+
     repositories {
         google()
         jcenter()
