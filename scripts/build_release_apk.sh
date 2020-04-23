@@ -19,10 +19,10 @@ extractApk() {
     --output "./app.apks" \
     --mode=universal \
     --overwrite \
-    --ks="./.keystore" \
-    --ks-pass=pass:"$ANDROID_KEYSTORE_PASSWORD" \
-    --ks-key-alias="$ANDROID_KEYSTORE_ALIAS" \
-    --key-pass=pass:"$ANDROID_KEYSTORE_PASSWORD" \
+    --ks="./.circleci/keystore.jks" \
+    --ks-pass=pass:"123456" \
+    --ks-key-alias="DEFAULT" \
+    --key-pass=pass:"123456" \
 
   # unzip apk to: ./universal.apk
   unzip -o "./app.apks" -d "./"
