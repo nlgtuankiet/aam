@@ -90,6 +90,14 @@ jobs:
           name: Compare apk
           command: bash ./scripts/compare_apk.sh
       - save_workspace
+  update-master-apk:
+    executor: gcloud_executor
+    steps:
+      - checkout
+      - restore_workspace
+      - run:
+          name: Update master apk
+          command: bash ./scripts/update_master_apk.sh ./build/universal.apk
   danger:
     executor: android_executor
     steps:
@@ -114,3 +122,13 @@ workflows:
       - danger:
           requires:
             - compare-apk
+  master-flow:
+    jobs:
+      - check-apk:
+          filters:
+            branches:
+              only:
+                - master
+      - update-master-apk:
+          requires:
+            - check-apk
