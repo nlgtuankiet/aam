@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. scripts/gcloud.sh
+
 # compare ./build/universal.apk to nearest master commit
 compareApk() {
   masterBranchRegex="master"
@@ -30,10 +32,5 @@ downloadApk() {
   gsutil cp "gs://all-about-min-ci.appspot.com/apk/$1.apk" "./$1.apk"
 }
 
-initGcloud() {
-  echo "$AAM_CI_GCLOUD_SERVICE_ACCOUNT_KEY_BASE64" | base64 -d -i - >>"key.json"
-  gcloud auth activate-service-account nlgtuankietbot@all-about-min-ci.iam.gserviceaccount.com --key-file=./key.json
-  gcloud config set project all-about-min-ci
-}
 
 compareApk
